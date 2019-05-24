@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class BoardTest extends TestCase {
 
     @Test
-    public void test_move_15_times() throws Exception
+    public void test_move_6_times() throws Exception
     {
         Ant ant = new Ant(new Position(0,0), new TurnDegree(0));
-        Board board = new Board(ant, 15);
+        Board board = new Board(ant, 6);
 
         board.moveAnt();
         ArrayList<MarkedPosition> marked = board.positions();
