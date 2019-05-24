@@ -40,6 +40,26 @@ public class TurnDegree
         return false;
     }
 
+    public boolean is90()
+    {
+        return this.toString().equals("90");
+    }
+
+    public boolean is180()
+    {
+        return this.toString().equals("180");
+    }
+
+    public boolean is270()
+    {
+        return this.toString().equals("270");
+    }
+
+    public boolean is0()
+    {
+        return this.toString().equals("360") || this.toString().equals("0");
+    }
+
     public String toString()
     {
         return "" + this.degree;

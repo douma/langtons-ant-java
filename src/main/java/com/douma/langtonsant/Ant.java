@@ -31,16 +31,14 @@ public class Ant
 
     private void updatePosition() throws Exception
     {
-        if(this.degree.toString().equals("0")) {
+        if(this.degree.is0()) {
             position = position.up();
-        } else if(this.degree.toString().equals("90")) {
+        } else if(this.degree.is90()) {
             position = position.right();
-        } else if(this.degree.toString().equals("180")) {
+        } else if(this.degree.is180()) {
             position = position.down();
-        } else if(this.degree.toString().equals("270")) {
+        } else if(this.degree.is270()) {
             position = position.left();
-        } else if(this.degree.toString().equals("360")) {
-            position = position.up();
         } else {
             throw new Exception("Cannot calculate position for degree " + this.degree.toString());
         }
