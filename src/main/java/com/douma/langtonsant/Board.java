@@ -50,11 +50,6 @@ public class Board {
         this.marked.remove(position.toString());
     }
 
-    public ArrayList<Position> markedPositions()
-    {
-        return new ArrayList(this.marked.values());
-    }
-
     public ArrayList<MarkedPosition> positions()
     {
         return this.positions;
