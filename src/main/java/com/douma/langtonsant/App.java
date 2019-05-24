@@ -42,13 +42,18 @@ class PixelCanvas extends Canvas {
             Board board = new Board(ant,32000);
             board.moveAnt();
 
-            g.setColor(new Color(255, 255, 255));
+            for(MarkedPosition position : board.positions()) {
+                if(position.isMarked()) {
+                    g.setColor(new Color(255, 255, 255));
+                } else {
+                    g.setColor(new Color(0, 0, 0));
+                }
 
-            for(Position position : board.markedPositions()) {
-                g.drawLine(position.x(), position.y(), position.x(), position.y());
+                g.drawLine(position.position().x(), position.position().y(),
+                        position.position().x(), position.position().y());
 
                 super.repaint();
-                Thread.sleep(5);
+                Thread.sleep(2);
             }
         }
         catch(Exception e){}

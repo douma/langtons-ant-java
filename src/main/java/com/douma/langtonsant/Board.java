@@ -9,11 +9,13 @@ public class Board {
 
     Ant ant;
     int length;
-    LinkedHashMap<String,Position> marked;
+    ArrayList<MarkedPosition> positions;
+    LinkedHashMap<String, Position> marked;
 
     Board(Ant ant, int length) {
         this.ant = ant;
         this.length = length;
+        this.positions = new ArrayList<MarkedPosition>();
         this.marked = new LinkedHashMap<String, Position>();
     }
 
@@ -38,16 +40,23 @@ public class Board {
 
     private void mark(Position position)
     {
+        this.positions.add(new MarkedPosition(true, position));
         this.marked.put(position.toString(), position);
     }
 
     private void unmark(Position position)
     {
+        this.positions.add(new MarkedPosition(false, position));
         this.marked.remove(position.toString());
     }
 
     public ArrayList<Position> markedPositions()
     {
-        return new ArrayList<Position>(this.marked.values());
+        return new ArrayList(this.marked.values());
+    }
+
+    public ArrayList<MarkedPosition> positions()
+    {
+        return this.positions;
     }
 }
