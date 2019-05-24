@@ -1,4 +1,4 @@
 # Langton's ant
 
-![](https://i.imgur.com/3SzMHX5.gif | width=300)
+<img src="https://i.imgur.com/3SzMHX5.gif" style="width:300px" width="300" />
 
