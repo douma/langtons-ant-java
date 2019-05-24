@@ -58,19 +58,19 @@ public class TurnDegreeTest extends TestCase {
         TurnDegree degree = new TurnDegree(0);
         assertEquals("270", degree.min(new TurnDegree(90)).toString());
 
-        assertEquals("0", degree
+        assertTrue(degree
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
-                .toString());
+                .is0());
 
-        assertEquals("270", degree
+        assertTrue(degree
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
                 .min(new TurnDegree(90))
-                .toString());
+                .is270());
     }
 }
