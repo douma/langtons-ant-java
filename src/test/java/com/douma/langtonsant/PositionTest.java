@@ -33,7 +33,7 @@ public class PositionTest extends TestCase
         Position newPosition = p.up();
 
         assertEquals(0, p.x());
-        assertEquals(-1, p.y());
+        assertEquals(1, p.y());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class PositionTest extends TestCase
         Position newPosition = p.down();
 
         assertEquals(0, p.x());
-        assertEquals(1, p.y());
+        assertEquals(-1, p.y());
     }
 
     @Test
@@ -52,6 +52,6 @@ public class PositionTest extends TestCase
         Position p = new Position(0,0);
         p.left();
         p.down();
-        assertEquals("[-1,1]", p.toString());
+        assertEquals("[-1,-1]", p.toString());
     }
 }
