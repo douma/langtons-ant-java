@@ -53,7 +53,7 @@ class PixelCanvas extends Canvas {
                         position.position().x(), position.position().y());
 
                 super.repaint();
-                Thread.sleep(2);
+                Thread.sleep(1);
             }
         }
         catch(Exception e){}
