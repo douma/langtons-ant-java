@@ -24,6 +24,7 @@ public class App
         JFrame f=new JFrame();
         f.add(new PixelCanvas());
         f.getContentPane().setBackground(Color.black);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         f.setSize(500,500);
         f.setVisible(true);
