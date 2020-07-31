@@ -1,62 +1,87 @@
 package com.douma.langtonsant;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
-import javax.swing.*;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.canvas.Canvas;
+import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.stage.WindowEvent;
 
-/**
- * Hello world!
- *
- */
-public class App 
+import java.awt.*;
+
+public class App extends Application
 {
     public static void main( String[] args )
     {
-        JFrame f=new JFrame();
-        f.add(new PixelCanvas());
-        f.getContentPane().setBackground(Color.black);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        f.setSize(500,500);
-        f.setVisible(true);
-        f.setResizable(false);
+        launch(args);
     }
-}
 
-class PixelCanvas extends Canvas {
     @Override
-    public void paint(Graphics g)  {
-        super.paint(g);
+    public void start(Stage stage) throws Exception
+    {
+        stage.setTitle("Langton's ant");
+        stage.setResizable(false);
+        Pane root = new Pane();
 
-        try
-        {
-            Ant ant = new Ant(new Position(430,430), new TurnDegree(0));
-            Board board = new Board(ant,32000);
-            board.moveAnt();
+        StackPane holder = new StackPane();
+        Canvas canvas = new Canvas(500,  500);
+        canvas.setScaleX(2);
+        canvas.setScaleY(2);
 
-            for(MarkedPosition position : board.positions()) {
-                if(position.isMarked()) {
-                    g.setColor(new Color(255, 255, 255));
-                } else {
-                    g.setColor(new Color(0, 0, 0));
-                }
+        holder.getChildren().add(canvas);
+        root.getChildren().add(holder);
 
-                g.drawLine(position.position().x(), position.position().y(),
-                        position.position().x(), position.position().y());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
 
-                super.repaint();
-                Thread.sleep(1);
+        holder.setStyle("-fx-background-color: black");
+        Scene scene = new Scene(root, 500, 500);
+        stage.setScene(scene);
+        stage.show();
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.exit();
+                System.exit(0);
             }
-        }
-        catch(Exception e){}
+        });
+
+        drawShapes(gc);
+    }
+
+    private void drawShapes(GraphicsContext gc )
+    {
+        new Thread(() -> {
+            try
+            {
+                Ant ant = new Ant(new Position(330,330), new TurnDegree(0));
+                Board board = new Board(ant,32000);
+                board.moveAnt();
+                gc.setLineWidth(1);
+
+                for(MarkedPosition position : board.positions()) {
+                    if(position.isMarked()) {
+                        gc.setFill(Color.WHITE);
+                        gc.setStroke(Color.WHITE);
+                    } else {
+                        gc.setFill(Color.BLACK);
+                        gc.setStroke(Color.BLACK);
+                    }
+
+                    gc.strokeLine(position.position().x(), position.position().y(),
+                            position.position().x(), position.position().y());
+
+                    Thread.sleep(1);
+                }
+            }
+            catch(Exception e){}
+        }).start();
     }
 }
