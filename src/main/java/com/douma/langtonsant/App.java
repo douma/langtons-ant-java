@@ -28,6 +28,7 @@ public class App extends Application
     {
         stage.setTitle("Langton's ant");
         stage.setResizable(false);
+        stage.setOpacity(0.8);
         Pane root = new Pane();
 
         StackPane holder = new StackPane();
